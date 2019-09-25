@@ -1,4 +1,4 @@
-require_relative "lib/robot" 
+require_relative "robot" 
 class CommandHandler
 	
 	def start
@@ -16,20 +16,23 @@ class CommandHandler
 		case input
 		
 		when /PLACE/
-			result = "please provide place command  in correct format"
+			message = "please provide place command  in correct format"
 			place_command = input.split(" ")[1]&.split(",")
 			if place_command.length == 3
 				x = place_command[0].to_i
 				y = place_command[1].to_i
 				f = place_command[2]
 				if is_validate_place_command?(x,y,f)
-					@robot = Robot.new(x,y,f)
-					if @robot?
+					@robot = Robot.new(x,y,f) rescue nil
+					if @robot
 						puts "robot placed"
 						puts @robot.x
 						puts @robot.y
-					end 
+					else
+						message = "not a right position to place the robot, please provide correct x,y"
+					end
 				end
+				puts message
 			end
 		when "LEFT","RIGHT"
 			puts "truning left/right"
