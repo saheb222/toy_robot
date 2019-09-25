@@ -25,9 +25,8 @@ class CommandHandler
 				if is_validate_place_command?(x,y,f)
 					@robot = Robot.new(x,y,f) rescue nil
 					if @robot
-						puts "robot placed"
-						puts @robot.x
-						puts @robot.y
+						puts "robot successfuly placed, you can now perfrom other operations"
+						ask_for_another_operations(@robot)
 					else
 						message = "not a right position to place the robot, please provide correct x,y"
 					end
@@ -37,7 +36,7 @@ class CommandHandler
 		when "LEFT","RIGHT"
 			puts "truning left/right"
 		when "MOVE"
-			puts "moving robot"
+			if @robot?
 		when "report"
 			puts "displaying the current status"
 		else
