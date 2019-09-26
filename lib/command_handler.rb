@@ -12,8 +12,10 @@ class CommandHandler
 	end
 
 	def start_command(input)
+		match_rgxp=/^PLACE\s+\d+\s*,\s*\d+\s*,\s*(NORTH|SOUTH|EAST|WEST)$/
 		case input
-		when /PLACE/
+		
+		when match_rgxp
 			message = "please provide place command  in correct format"
 			place_command = input.split(" ")[1]&.split(",")
 			if place_command.length == 3
