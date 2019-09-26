@@ -2,20 +2,20 @@ require_relative "robot"
 class CommandHandler
 	attr_accessor :robot
 	def start
-		puts "please provide some command to play with me "
+		puts "please provide the PLACE command"
 		input = gets.chomp
 		while input != "q"
 			start_command(input.upcase)
 			input =  gets.chomp
 		end	
-		puts "bye...see you soon"	
+		puts "Exiting..."	
 	end
 
 	def start_command(input)
-		match_rgxp=/^PLACE\s+\d+\s*,\s*\d+\s*,\s*(NORTH|SOUTH|EAST|WEST)$/
+		match_place=/^PLACE\s+\d+\s*,\s*\d+\s*,\s*(NORTH|SOUTH|EAST|WEST)$/
 		case input
 		
-		when match_rgxp
+		when match_place
 			message = "please provide place command  in correct format"
 			place_command = input.split(" ")[1]&.split(",")
 			if place_command.length == 3
@@ -33,7 +33,7 @@ class CommandHandler
 				puts message
 			end
 		when "MOVE"
-			@robot.move if operation_possible? rescue puts "cant move with this direction,robot will fall out from table"
+			puts @robot.move if operation_possible?
 		when "RIGHT","LEFT"
 			@robot.turn(input) if operation_possible?
 		when "REPORT"
@@ -47,6 +47,6 @@ class CommandHandler
 		@robot? true : false
 	end
 	def is_validate_place_command?(x,y,f)
-		x.class==Fixnum && y.class==Fixnum &&["NORTH","SOUTH","EAST","WEST"].include?(f) ? true : false
+		x.class==Integer && y.class==Integer &&["NORTH","SOUTH","EAST","WEST"].include?(f) ? true : false
 	end
 end

@@ -17,14 +17,18 @@ class Robot
 	def move
 		if @f == "NORTH" && @y<YMAX-1
 			@y += 1
+			" "
 		elsif @f == "SOUTH" && @y>0
 			@y -= 1
+			" "
 		elsif @f == "EAST" && @x<XMAX-1	
-			@x +=1	
+			@x +=1
+			" "	
 		elsif @f == "WEST" && @x>0
 			@x -= 1
+			" "
 		else
-			raise
+			"it will result a fall down from table,hence not permitted"
 		end
 	end
 	

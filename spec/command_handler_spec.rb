@@ -1,17 +1,24 @@
 require 'rspec'
 require_relative "../lib/command_handler"
-describe CommandHandler do
+RSpec.describe CommandHandler do
+	# subject{CommandHandler.new}
 	describe "#is_validate_place_command?" do 
-		it 'return false' do
-			command = CommandHandler.new
-			expect(command.is_validate_place_command?('a','b',"NORTH")).to eql(false)
+		it 'returns false if the place command is not valid' do
+			expect(subject.is_validate_place_command?('a','b',"NORTH")).to eql(false)
 		end
-		it 'return true' do
+		it 'return true if the place command is valid' do
 			command = CommandHandler.new
-			expect(command.is_validate_place_command?(1,1,"NORTH")).to eql(true)
+			expect(subject.is_validate_place_command?(1,1,"NORTH")).to eql(true)
 		end
 	end
-	describe "#start_command" do 
-		
+	context "ignore invalide move before place command" do 
+		it "checks where any operation is permitable or  not" do
+			expect(CommandHandler.new().operation_possible?).to eq(false)
+		end
+		it "ensures that other command can only be executed after a valif place command" do
+			command = CommandHandler.new
+			command.start_command("PLACE 1,1,SOUTH")
+			expect(command.operation_possible?).to eq(true)
+		end
 	end
 end
