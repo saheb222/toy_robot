@@ -32,6 +32,10 @@ class CommandHandler
 			end
 		when "MOVE"
 			@robot.move if operation_possible?
+		when "RIGHT","LEFT"
+			@robot.turn(input) if operation_possible?
+		when "REPORT"
+			@robot.report if operation_possible?
 		else
 			puts "invalid command"
 		end
