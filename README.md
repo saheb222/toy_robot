@@ -3,8 +3,8 @@
 ### Run application
 
 ```bash
-git clone https://github.com/bater/robot.git
-cd robot
+git clone https://github.com/saheb222/toy_robot.git
+cd toy_robot
 ruby main.rb
 ```
 
