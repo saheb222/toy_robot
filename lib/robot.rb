@@ -24,6 +24,8 @@ class Robot
 			else @f == "WEST"
 				@x -= 1
 			end
+		else
+			raise "prevented from falling out from table"
 		end
 	end
 	

@@ -31,7 +31,7 @@ class CommandHandler
 				puts message
 			end
 		when "MOVE"
-			@robot.move if operation_possible?
+			@robot.move if operation_possible? rescue e.message
 		when "RIGHT","LEFT"
 			@robot.turn(input) if operation_possible?
 		when "REPORT"
