@@ -31,11 +31,11 @@ class CommandHandler
 				puts message
 			end
 		when "MOVE"
-			@robot.move if operation_possible? rescue e.message
+			@robot.move if operation_possible? rescue puts "cant move with this direction,robot will fall out from table"
 		when "RIGHT","LEFT"
 			@robot.turn(input) if operation_possible?
 		when "REPORT"
-			@robot.report if operation_possible?
+			puts @robot.report if operation_possible?
 		else
 			puts "invalid command"
 		end

@@ -1,7 +1,8 @@
 class Robot
 	XMAX = 5
 	YMAX = 5
-	MOVEMENT = {NORTH:"@y += 1", SOUTH:"@y -= 1", EAST:"1", WEST:"-1"}
+	TURN_RIGHT = {NORTH: "EAST", SOUTH: "WEST", EAST: "SOUTH", WEST: "NORTH"}
+  TURN_LEFT = {NORTH: "WEST", SOUTH: "EAST", EAST: "NORTH", WEST: "SOUTH"}
 	attr_accessor :x,:y,:f
 	def initialize(x_coord,y_coord,f)
 		if !will_fall?(x_coord,y_coord,1)
@@ -9,32 +10,30 @@ class Robot
 			@y = y_coord
 			@f = f 
 		else
-			raise ArgumentError,"not a right position to place the robot"
+			raise "not a right position to place the robot"
 		end
 	end
-	
+
 	def move
-		if !will_fall?(@x,@y,2)
-			if @f == "NORTH" 
-				@y += 1
-			elsif @f == "SOUTH"
-				@y -= 1
-			elsif @f == "EAST"	
-				@x +=1	
-			else @f == "WEST"
-				@x -= 1
-			end
+		if @f == "NORTH" && @y<YMAX-1
+			@y += 1
+		elsif @f == "SOUTH" && @y>0
+			@y -= 1
+		elsif @f == "EAST" && @x<XMAX-1	
+			@x +=1	
+		elsif @f == "WEST" && @x>0
+			@x -= 1
 		else
-			raise "prevented from falling out from table"
+			raise
 		end
 	end
 	
 	def turn(direction)
-		puts "turning : #{direction}"
+		@f = direction == "RIGHT" ? TURN_RIGHT[@f.to_sym] : TURN_LEFT[@f.to_sym]
 	end
 	
 	def report
-		puts "reporting the status"
+		"#{@x},#{@y},#{@f}"
 	end
 	
 	def will_fall?(x,y,boundary)
