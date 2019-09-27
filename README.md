@@ -7,8 +7,8 @@ git clone https://github.com/saheb222/toy_robot.git
 cd toy_robot
 ruby main.rb
 ```
-## Exit from the operations
-provide "q" (commend) while asking for the input to exit anytime from the application
+### Exit from the operations
+provide "q" (command) while asking for the input to exit anytime from the application
 ### Run test
 
 Inside the folder path and run `rspec`
