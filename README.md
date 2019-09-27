@@ -7,7 +7,7 @@ git clone https://github.com/saheb222/toy_robot.git
 cd toy_robot
 ruby main.rb
 ```
-### Exit from the operations
+### Exit from the application
 provide "q" (command) while asking for the input to exit anytime from the application
 ### Run test
 
